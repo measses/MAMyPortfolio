@@ -1,5 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
+using DataLayer;
+using Microsoft.EntityFrameworkCore;
 
+var builder = WebApplication.CreateBuilder(args);
+//proje baslarken db verilerini ayaða getiren alan.
+builder.Services.AddDbContext<AppDbContext>(opt=>opt.UseSqlServer(builder.Configuration.GetConnectionString("ctrsvr")));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
