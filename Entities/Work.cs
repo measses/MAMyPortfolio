@@ -8,6 +8,6 @@ namespace Entities
 {
     public class Work:BaseModel
     {
-        public string ImageUrl { get; set; }
+        public required string ImageUrl { get; set; }
     }
 }

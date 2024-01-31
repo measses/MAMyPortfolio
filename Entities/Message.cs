@@ -8,9 +8,9 @@ namespace Entities
 {
     public class Message:BaseModel
     {
-        public string Email { get; set; }
-        public string Subject { get; set; }
-        public string Text { get; set; }
+        public required string Email { get; set; }
+        public required string Subject { get; set; }
+        public required string Text { get; set; }
 
     }
 }

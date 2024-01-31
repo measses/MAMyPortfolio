@@ -9,7 +9,7 @@ namespace Entities
     public class BaseModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         public DateTime DataCreated { get; set; } = DateTime.Now;
 

@@ -9,8 +9,8 @@ namespace Entities
     public class Service:BaseModel
     {
         
-        public string Icon { get; set; }
-        public string Description { get; set; }
+        public required string Icon { get; set; }
+        public required string Description { get; set; }
 
     }
 }

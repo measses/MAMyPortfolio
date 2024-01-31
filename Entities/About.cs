@@ -9,17 +9,17 @@ namespace Entities
     public class About:BaseModel
     {
        
-        public string Description { get; set; }
+        public required string Description { get; set; }
 
-        public string Title { get; set; }
+        public required string Title { get; set; }
 
-        public string Phone { get; set; }
+        public required string Phone { get; set; }
 
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
-        public string Job { get; set; }
+        public required string Job { get; set; }
 
-        public string ImageUrl { get; set; }
+        public required string ImageUrl { get; set; }
 
 
     }
