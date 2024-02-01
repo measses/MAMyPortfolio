@@ -13,7 +13,7 @@ namespace Entities
 
         public DateTime DataCreated { get; set; } = DateTime.Now;
 
-        public DateTime DataModified { get; set; }
+        public DateTime? DataModified { get; set; }
 
         public bool IsActive { get; set; } = true;
 
