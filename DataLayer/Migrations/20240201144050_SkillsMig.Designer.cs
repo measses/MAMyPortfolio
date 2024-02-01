@@ -4,6 +4,7 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240201144050_SkillsMig")]
+    partial class SkillsMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DataCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataModified")
+                    b.Property<DateTime>("DataModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -87,7 +90,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DataCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataModified")
+                    b.Property<DateTime>("DataModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -121,7 +124,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DataCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataModified")
+                    b.Property<DateTime>("DataModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -159,7 +162,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DataCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataModified")
+                    b.Property<DateTime>("DataModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -193,10 +196,11 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DataCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataModified")
+                    b.Property<DateTime>("DataModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -225,7 +229,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DataCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataModified")
+                    b.Property<DateTime>("DataModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Icon")
@@ -259,7 +263,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DataCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DataModified")
+                    b.Property<DateTime>("DataModified")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImageUrl")

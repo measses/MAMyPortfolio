@@ -18,7 +18,8 @@ namespace DataLayer
         public DbSet<Message> Messages { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
-        public DbSet<Work> Work { get; set; }
+        public DbSet<Work> Works{ get; set; }
+        public DbSet<Skill> Skills { get; set; }
 
 
     }
