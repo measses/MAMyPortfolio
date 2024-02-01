@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BussinesLayer.Content;
 
-public class ContactManager : IGenericService<Contact>
+public class ContactManager : IGenericService<Contact>, IContactService
 {
     private readonly IContact _contact;
 

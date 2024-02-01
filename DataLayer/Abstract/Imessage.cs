@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Abstract;
 
-public interface Imessage:IGeneric<Message>
+public interface IMessage:IGeneric<Message>
 {
 }

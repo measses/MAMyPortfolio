@@ -20,6 +20,8 @@ namespace DataLayer
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Work> Works{ get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Portfolio> Portfolios { get; set; }
+
 
 
     }

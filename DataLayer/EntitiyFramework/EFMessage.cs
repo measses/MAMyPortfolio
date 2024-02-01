@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.EntitiyFramework;
 
-public class EFMessage : GenericRepository<Message>, Imessage
+public class EFMessage : GenericRepository<Message>, IMessage
 {
     public EFMessage(AppDbContext context) : base(context)
     {

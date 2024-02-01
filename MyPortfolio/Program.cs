@@ -10,8 +10,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(opt=>opt.UseSqlServer(builder.Configuration.GetConnectionString("ctrsvr")));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IAboutService, AboutManager>();
+builder.Services.AddScoped<IAbout, EFAbout>();
+builder.Services.AddScoped<IContactService, ContactManager>();
+builder.Services.AddScoped<IContact, EFContact>();
+builder.Services.AddScoped<IMessageService, MessageManager>();
+builder.Services.AddScoped<IMessage, EFMessage>();
+builder.Services.AddScoped<IServiceService, ServiceManager>();
+builder.Services.AddScoped<IService, EFService>();
 builder.Services.AddScoped<ISkillService, SkillManager>();
 builder.Services.AddScoped<ISkill, EFSkill>();
+builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
+builder.Services.AddScoped<ISocialMedia, EFSocialMedia>();
+builder.Services.AddScoped<IPortfolioService, PortfolioManager>();
+builder.Services.AddScoped<IPortfolio, EFPortfolio>();
+
+
+
+
+
+
+
+
+
+
+
 
 var app = builder.Build();
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BussinesLayer.Content;
 
-public class SocialMediaManager : IGenericService<SocialMedia>
+public class SocialMediaManager : IGenericService<SocialMedia>, ISocialMediaService
 {
     private readonly ISocialMedia _socialMedia;
 public SocialMediaManager(ISocialMedia socialMedia)

@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Abstract;
 
-public interface IWork:IGeneric<Work>
+public interface IPortfolio:IGeneric<Portfolio>
 {
 }

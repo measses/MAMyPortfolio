@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.EntitiyFramework;
 
-internal class EFAbout : GenericRepository<About>, IAbout
+public class EFAbout : GenericRepository<About>, IAbout
 {
     public EFAbout(AppDbContext context) : base(context)
     {

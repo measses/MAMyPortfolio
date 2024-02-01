@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace BussinesLayer.Services;
 
-public interface IWorkService:IGenericService<Work>
+public interface IPortfolioService:IGenericService<Portfolio>
 {
 }

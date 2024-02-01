@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace BussinesLayer.Content;
 
-public class MessageManager : IGenericService<Message>
+public class MessageManager : IGenericService<Message>, IMessageService
 {
-    private readonly Imessage _message;
-public MessageManager(Imessage message)
+    private readonly IMessage _message;
+public MessageManager(IMessage message)
     {
         _message = message;
     }
@@ -34,11 +34,11 @@ public MessageManager(Imessage message)
 
     public void TRemove(Message t)
     {
-        
+        _message.Delete(t);
     }
 
     public void TUpdate(Message t)
     {
-        throw new NotImplementedException();
+        _message.Update(t);
     }
 }

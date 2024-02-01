@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.EntitiyFramework;
 
-public class EFWork : GenericRepository<Work>, IWork
+public class EFPortfolio : GenericRepository<Portfolio>, IPortfolio
 {
-    public EFWork(AppDbContext context) : base(context)
+    public EFPortfolio(AppDbContext context) : base(context)
     {
     }
 }

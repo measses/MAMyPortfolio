@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace BussinesLayer.Services;
 
-public interface IContactService:IGenericService<Service>
+public interface IContactService:IGenericService<Contact>
 {
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BussinesLayer.Content;
 
-public class ServiceManager : IGenericService<Service>
+public class ServiceManager : IGenericService<Service>, IServiceService
 {
     private readonly IService _service;
     public ServiceManager(IService service)
