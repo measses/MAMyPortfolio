@@ -1,4 +1,8 @@
+using BussinesLayer.Content;
+using BussinesLayer.Services;
 using DataLayer;
+using DataLayer.Abstract;
+using DataLayer.EntitiyFramework;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(opt=>opt.UseSqlServer(builder.Configuration.GetConnectionString("ctrsvr")));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ISkillService, SkillManager>();
+builder.Services.AddScoped<ISkill, EFSkill>();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -26,6 +33,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Default}/{action=Index}/{id?}");
 
 app.Run();
