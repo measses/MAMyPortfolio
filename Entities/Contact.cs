@@ -10,7 +10,6 @@ namespace Entities
     {
         public required string Adress { get; set; }
         public required string Phone { get; set; }
-
         public required string Email { get; set; }
     }
 }
