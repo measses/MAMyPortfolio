@@ -14,5 +14,9 @@ namespace MyPortfolio.Areas.Admin.Controllers
         {
             return PartialView();
         }
+        public PartialViewResult SidebarMenuPartial()
+        {
+            return PartialView();
+        }
     }
 }
