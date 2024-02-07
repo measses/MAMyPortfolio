@@ -1,5 +1,6 @@
 ﻿using BussinesLayer.Services;
 using DataLayer.Abstract;
+using DataLayer.EntitiyFramework;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -11,35 +12,39 @@ namespace BussinesLayer.Content;
 
 public class PortfolioManager : IGenericService<Portfolio>, IPortfolioService
 {
-    private readonly IPortfolio _work;
+    private readonly IPortfolio _portfolio;
 
     public PortfolioManager(IPortfolio portfolio)
     {
-        _work = portfolio;
+        _portfolio = portfolio;
     }
+
+
 
     public void TAdd(Portfolio t)
     {
-        throw new NotImplementedException();
+        _portfolio.Add(t);
     }
 
     public List<Portfolio> TGetAll()
     {
-       return _work.GetAll();
+       return _portfolio.GetAll();
     }
 
     public Portfolio TGetById(int id)
     {
-        throw new NotImplementedException();
+        return (Portfolio)_portfolio.GetById(id);
+
     }
 
     public void TRemove(Portfolio t)
     {
-        throw new NotImplementedException();
+        _portfolio.Delete(t);
+
     }
 
     public void TUpdate(Portfolio t)
     {
-        throw new NotImplementedException();
+        _portfolio.Delete(t);
     }
 }

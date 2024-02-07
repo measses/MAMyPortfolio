@@ -30,16 +30,16 @@ public class SkillManager : IGenericService<Skill>, ISkillService
 
     public Skill TGetById(int id)
     {
-        throw new NotImplementedException();
+        return _skill.GetById(id);
     }
 
     public void TRemove(Skill t)
     {
-        throw new NotImplementedException();
+        _skill.Delete(t);
     }
 
     public void TUpdate(Skill t)
     {
-        throw new NotImplementedException();
+        _skill.Update(t);
     }
 }
