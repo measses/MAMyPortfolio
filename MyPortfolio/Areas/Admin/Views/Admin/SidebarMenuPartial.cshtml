@@ -1,0 +1,50 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+
+<div id="sidebar-menu">
+    <!-- Left Menu Start -->
+    <ul class="metismenu list-unstyled" id="side-menu">
+        <li class="menu-title">Menu</li>
+        <li>
+            <a asp-action="Index" asp-controller="Admin">
+                <i class="uil-users-alt"></i><span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="uil-window-section"></i>
+                <span>Düzenlemeler</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li><a asp-controller="About" asp-action="Index">Hakkımda</a></li> 
+                <li><a asp-controller="Portfolio" asp-action="Index">Portfolyo</a></li>
+                <li><a asp-controller="Service" asp-action="Index">Servis</a></li>
+                <li><a asp-controller="Skill" asp-action="Index">Yetenekler</a></li>
+                <li><a asp-controller="Contact" asp-action="Index">İletişim</a></li>
+
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="uil-blogger-alt"></i>
+                <span>Blog</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="true">
+                <li><a asp-controller="BlogCategory" asp-action="Index">Blog Kategorileri</a></li>
+                <li><a asp-controller="BlogDetails" asp-action="Index">Blog Listesi</a></li>
+                <li><a asp-controller="BlogDetails" asp-action="AddDetails">Blog Oluştur</a></li>
+
+
+
+            </ul>
+        </li>
+        <li><a class="uil-comment-alt-message" asp-controller="Message" asp-action="Index">Gelen Mesajlar</a></li>
+
+        <li><a class="uil-sliders-v-alt" asp-controller="Category" asp-action="Index"> Ayarlar</a></li>
+        <li><a class="uil-sign-out-alt" asp-controller="Category" asp-action="Index"> Çıkış Yap</a></li>
+    </ul>
+</div>

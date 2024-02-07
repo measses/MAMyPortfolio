@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!-- HTML -->
+<div>
+    <div class="card">
+        <div class="card-header text-white bg-primary bg-gradient">
+            <span class="fs-4">Social Media Listesi</span>
+            <a href="#" id="btnEkle" class="btn btn-warning ms-2">Yeni Sosyal Medya Ekle</a>
+        </div>
+        <div class="card-body">
+            <table id="socialMediaTable" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Icon</th>
+                        <th>Url</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+     aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Yeni Sosyal Medya Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input id="txtName" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Icon</label>
+                        <input id="txtIcon" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Url</label>
+                        <input id="txtUrl" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button id="btnSave" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#btnEkle").click(function () {
+            $("#modalTitle").text("Yeni Sosyal Medya Ekle");
+            $("#btnSave").text("Kaydet").removeClass('btn-success').addClass('btn-primary');
+            $("#txtName").val("");
+            $("#txtIcon").val("");
+            $("#txtUrl").val("");
+
+            $("#modal").modal('show');
+
+            $("#btnSave").off().click(function () {
+                var data = {
+                    Name: $("#txtName").val(),
+                    Icon: $("#txtIcon").val(),
+                    Url: $("#txtUrl").val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Admin/SocialMedia/SocialMediaAdd',
+                    data: data,
+                    success: function (res) {
+                        $("#modal").modal('hide');
+                        $("#txtName").val("");
+                        $("#txtIcon").val("");
+                        $("#txtUrl").val("");
+                        dataTable.ajax.reload();
+                    },
+                    error: function (error) {
+                        alert('Sosyal medya eklerken bir hata oluştu: ' + error.statusText);
+                    }
+                });
+            });
+        });
+
+        var dataTable = $('#socialMediaTable').DataTable({
+            ajax: {
+                url: '/Admin/SocialMedia/GetAll',
+                dataSrc: ''
+            },
+            columns: [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'icon' },
+                { data: 'url' },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `<a href="#" onclick="deleteSocialMedia(${row.id})" class="btn btn-sm btn-danger">Sil</a>
+                                    <a href="#" onclick="editSocialMedia(${data.id})" class="btn btn-sm btn-primary">Düzenle</a>`;
+                    }
+                }
+            ]
+        });
+
+        function deleteSocialMedia(socialMediaId) {
+            if (confirm('Bu sosyal medyayı silmek istediğinize emin misiniz?')) {
+                $.ajax({
+                    url: '/Admin/SocialMedia/SocialMediaDelete/' + socialMediaId,
+                    method: 'POST',
+                    success: function () {
+                        alert('Sosyal medya başarıyla silindi.');
+                        dataTable.ajax.reload();
+                    },
+                    error: function () {
+                        alert('Sosyal medya silinirken bir hata oluştu.');
+                    }
+                });
+            }
+        }
+    });
+</script>
+

@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<!-- HTML -->
+<div>
+    <div class="card">
+        <div class="card-header text-white bg-primary bg-gradient">
+            <span class="fs-4">Skill Listesi</span>
+            <a href="#" id="btnEkle" class="btn btn-warning ms-2">Yeni Skill Ekle</a>
+        </div>
+        <div class="card-body">
+            <table id="skillTable" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+     aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Yeni Skill Ekle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input id="txtName" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Value</label>
+                        <input id="txtValue" class="form-control" type="number" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <input id="txtDescription" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button id="btnSave" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#btnEkle").click(function () {
+            $("#modalTitle").text("Yeni Skill Ekle");
+            $("#btnSave").text("Kaydet").removeClass('btn-success').addClass('btn-primary');
+            $("#txtName").val("");
+            $("#txtValue").val("");
+            $("#txtDescription").val("");
+
+            $("#modal").modal('show');
+
+            $("#btnSave").off().click(function () {
+                var data = {
+                    Name: $("#txtName").val(),
+                    Value: $("#txtValue").val(),
+                    Description: $("#txtDescription").val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Admin/Skill/SkillAdd',
+                    data: data,
+                    success: function (res) {
+                        $("#modal").modal('hide');
+                        $("#txtName").val("");
+                        $("#txtValue").val("");
+                        $("#txtDescription").val("");
+                        dataTable.ajax.reload();
+                    },
+                    error: function (error) {
+                        alert('Skill eklerken bir hata oluştu: ' + error.statusText);
+                    }
+                });
+            });
+        });
+
+        var dataTable = $('#skillTable').DataTable({
+            ajax: {
+                url: '/Admin/Skill/GetAll',
+                dataSrc: ''
+            },
+            columns: [
+                { data: 'id' },
+                { data: 'name' },
+                { data: 'value' },
+                { data: 'description' },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        return `<a href="#" onclick="deleteSkill(${row.id})" class="btn btn-sm btn-danger">Sil</a>
+                                        <a href="#" onclick="editSkill(${data.id})" class="btn btn-sm btn-primary">Düzenle</a>`;
+                    }
+                }
+            ]
+        });
+    });
+    function deleteSkill(skillId) {
+        Swal.fire({
+            title: 'Bu yeteneği silmek istediğinize emin misiniz?',
+            text: "Bu işlem geri alınamaz!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet, sil!',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/Admin/Skill/SkillDelete/' + skillId,
+                    method: 'POST',
+                    success: function () {
+                        Swal.fire(
+                            'Başarılı!',
+                            'Skill başarıyla silindi.',
+                            'success'
+                        );
+                        dataTable.ajax.reload();
+                    },
+                    error: function () {
+                        Swal.fire(
+                            'Hata!',
+                            'Skill silinemedi.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+
+</script>
+
+
