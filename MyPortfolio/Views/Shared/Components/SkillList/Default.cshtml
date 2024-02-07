@@ -10,7 +10,10 @@
 
         <div class="section-title">
             <h2>Skills</h2>
-            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                 @foreach (var item in Model)
+            {
+                <p>@item.Description</p>
+            }
         </div>
 
         <div class="row skills-content">
@@ -19,9 +22,9 @@
                 @foreach (var item in Model)
                 {
                     <div class="progress">
-                        <span class="skill">@item.Name <i class="val">@item.value%</i></span>
+                        <span class="skill">@item.Name <i class="val">@item.Value%</i></span>
                         <div class="progress-bar-wrap">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="@item.value" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                 }
