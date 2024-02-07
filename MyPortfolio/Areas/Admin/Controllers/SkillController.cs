@@ -1,9 +1,11 @@
 ﻿using BussinesLayer.Services;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyPortfolio.Areas.Admin.Controllers
 {
-	public class SkillController : Controller
+    [Area("Admin")]
+    public class SkillController : Controller
 	{
 		private ISkillService _skillService;
 
@@ -16,11 +18,18 @@ namespace MyPortfolio.Areas.Admin.Controllers
 		{
 			return View();
 		}
-		public IActionResult SkillAdd()
+        [HttpGet]
+        public IActionResult SkillAdd()
 		{
 			return View();
 		}
-		public IActionResult SkillUpdate()
+        [HttpPost]
+        public IActionResult SkillAdd(Skill skill)
+        {
+            _skillService.TAdd(skill);
+            return Ok();
+        }
+        public IActionResult SkillUpdate()
 		{
 			return View();
 		}
@@ -29,9 +38,11 @@ namespace MyPortfolio.Areas.Admin.Controllers
 			var values = _skillService.TGetAll();
 			return Json(values);
 		}
-		public IActionResult SkillDelete()
+		public IActionResult SkillDelete(int id)
 		{
-			return View();
-		}
+            var values = _skillService.TGetById(id);
+            _skillService.TRemove(values);
+            return Ok();
+        }
 	}
 }

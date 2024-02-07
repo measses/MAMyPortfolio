@@ -1,9 +1,11 @@
 ﻿using BussinesLayer.Services;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyPortfolio.Areas.Admin.Controllers
 {
-	public class ServiceController : Controller
+    [Area("Admin")]
+    public class ServiceController : Controller
 	{
 		private IServiceService _serviceService;
 
@@ -16,10 +18,19 @@ namespace MyPortfolio.Areas.Admin.Controllers
 		{
 			return View();
 		}
-		public IActionResult ServiceAdd()
+        [HttpGet]
+
+        public IActionResult ServiceAdd()
+        {
+            return View();
+        }
+        [HttpPost]
+
+        public IActionResult ServiceAdd(Service service)
 		{
-			return View();
-		}
+            _serviceService.TAdd(service);
+            return Ok();
+        }
 		public IActionResult ServiceUpdate()
 		{
 			return View();
@@ -29,9 +40,11 @@ namespace MyPortfolio.Areas.Admin.Controllers
 			var values = _serviceService.TGetAll();
 			return Json(values);
 		}
-		public IActionResult ServiceDelete()
+		public IActionResult ServiceDelete(int id)
 		{
-			return View();
-		}
+            var values = _serviceService.TGetById(id);
+            _serviceService.TRemove(values);
+            return Ok();
+        }
 	}
 }

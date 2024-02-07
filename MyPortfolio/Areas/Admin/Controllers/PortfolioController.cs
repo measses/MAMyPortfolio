@@ -1,9 +1,11 @@
 ﻿using BussinesLayer.Services;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyPortfolio.Areas.Admin.Controllers
 {
-	public class PortfolioController : Controller
+    [Area("Admin")]
+    public class PortfolioController : Controller
 	{
 		private IPortfolioService _portfolioService;
 
@@ -16,10 +18,17 @@ namespace MyPortfolio.Areas.Admin.Controllers
 		{
 			return View();
 		}
-		public IActionResult PortfolioAdd()
+        [HttpGet]
+        public IActionResult PortfolioAdd()
 		{
 			return View();
 		}
+        [HttpPost]
+        public IActionResult PortfolioAdd(Portfolio portfolio)
+		{
+            _portfolioService.TAdd(portfolio);
+            return Ok();
+        }
 		public IActionResult PortfolioUpdate()
 		{
 			return View();
@@ -29,9 +38,11 @@ namespace MyPortfolio.Areas.Admin.Controllers
 			var values = _portfolioService.TGetAll();
 			return Json(values);
 		}
-		public IActionResult PortfolioDelete()
+		public IActionResult PortfolioDelete(int id)
 		{
-			return View();
-		}
+            var values = _portfolioService.TGetById(id);
+            _portfolioService.TRemove(values);
+            return Ok();
+        }
 	}
 }

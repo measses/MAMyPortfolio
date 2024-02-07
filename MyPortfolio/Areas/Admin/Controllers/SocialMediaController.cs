@@ -1,9 +1,11 @@
 ﻿using BussinesLayer.Services;
+using Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MyPortfolio.Areas.Admin.Controllers
 {
-	public class SocialMediaController : Controller
+    [Area("Admin")]
+    public class SocialMediaController : Controller
 	{
 		private ISocialMediaService _socialMediaService;
 
@@ -16,10 +18,17 @@ namespace MyPortfolio.Areas.Admin.Controllers
 		{
 			return View();
 		}
-		public IActionResult SocialMediaAdd()
+        [HttpGet]
+        public IActionResult SocialMediaAdd()
 		{
 			return View();
 		}
+        [HttpPost]
+        public IActionResult SocialMediaAdd(SocialMedia socialMedia)
+        {
+            _socialMediaService.TAdd(socialMedia);
+            return Ok();
+        }
 		public IActionResult SocialMediaUpdate()
 		{
 			return View();
@@ -29,9 +38,11 @@ namespace MyPortfolio.Areas.Admin.Controllers
 			var values = _socialMediaService.TGetAll();
 			return Json(values);
 		}
-		public IActionResult SocialMediaDelete()
+		public IActionResult SocialMediaDelete(int id)
 		{
-			return View();
-		}
+            var values = _socialMediaService.TGetById(id);
+            _socialMediaService.TRemove(values);
+            return Ok();
+        }
 	}
 }
